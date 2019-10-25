@@ -61,7 +61,18 @@
 // -----------
 function hasCycle(linkedList) {
   // TODO: Implement the hasCycle function!
+  let front = linkedList.head;
+  let back = linkedList.head;
+  let round = true;
 
+  while (back = back.next) {
+    if (back === front) return true;
+    
+    front = round ? front : front.next;
+    round = !round;
+  }
+  
+  return false;
 }
 
 
