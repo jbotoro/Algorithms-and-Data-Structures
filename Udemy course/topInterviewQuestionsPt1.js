@@ -24,3 +24,15 @@ var fizzBuzz = function (n) {
     return new Array(n).fill(0).map((a, b) => (++b % 3 ? '' : 'Fizz') + (b % 5 ? '' : 'Buzz') || '' + b)
 };
 
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+ //Given a non-empty array of integers, every element appears twice except for one.
+ // Find that single one.
+var singleNumber = function (nums) {
+    return nums.reduce((prev, curr) => prev ^ curr, 0)
+};
