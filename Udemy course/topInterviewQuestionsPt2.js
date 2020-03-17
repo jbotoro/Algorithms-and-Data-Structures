@@ -23,3 +23,24 @@ var maxDepth = function (root) {
 
     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
 };
+
+
+//Given an array nums, write a function to move all 0's to the end of it while 
+// maintaining the relative order of the non-zero elements.
+
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function (nums) {
+    let i = 0
+    let j = -1;
+
+    while (++j < nums.length) {
+        if (nums[j] !== 0) {
+            nums[i++] = nums[j]
+        }
+    }
+    return nums.fill(0, i)
+};
