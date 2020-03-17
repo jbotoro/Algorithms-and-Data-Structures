@@ -44,3 +44,24 @@ var moveZeroes = function (nums) {
     }
     return nums.fill(0, i)
 };
+
+
+//Calculate the sum of two integers a and b, but you are not allowed 
+// to use the operator + and -.
+
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+var getSum = function (a, b) {
+    let carry;
+
+    while (b) {
+        carry = a & b;
+        a ^= b;
+        b = carry << 1;
+    }
+
+    return a;
+};
