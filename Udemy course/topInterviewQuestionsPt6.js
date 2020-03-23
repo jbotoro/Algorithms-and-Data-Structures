@@ -96,3 +96,35 @@ var hammingWeight = function (n) {
     // remove 0s from base2 representation of the number
     return n.toString(2).replace(/0/g, '').length;
 };
+
+//#5 House Robber
+//You are a professional robber planning to rob houses along a street. 
+//Each house has a certain amount of money stashed, the only constraint stopping 
+//you from robbing each of them is that adjacent houses have security system 
+//connected and it will automatically contact the police if two adjacent houses 
+//were broken into on the same night.
+
+//Given a list of non - negative integers representing the amount of money of 
+//each house, determine the maximum amount of money you can rob tonight 
+//without alerting the police.
+
+//Example 1:
+
+//Input: [1, 2, 3, 1]
+//Output: 4
+//Explanation: Rob house 1(money = 1) and then rob house 3(money = 3).
+//Total amount you can rob = 1 + 3 = 4.
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+//variable p records previous 2 max values: p[1] is the previous one and 
+//p[0] is the one before previous one. p is initialized as [0,0]. 
+//variable n is the value at each position.
+var rob = function (nums) {
+    return nums.reduce(function (p, n) {
+        return [p[1], Math.max(p[0] + n, p[1])];
+    }, [0, 0])[1];
+};
