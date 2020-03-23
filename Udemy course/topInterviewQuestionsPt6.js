@@ -54,3 +54,31 @@ var maxSubArray = function (nums) {
     }
     return Math.max(...nums)
 };
+
+
+// #3 Power of Three:
+
+//Given an integer, write a function to determine if it is a power of three.
+// Output should be true or false
+
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfThree = function (n) {
+    /* 
+    If a number is a power of 3, only the first digit in its ternary form is 1,
+    and all the other digits are zeros. 
+    Examples: 1, 10, 100, 1000, etc.
+    So we can just convert a decimal number to ternary and check if the above
+    conditions are met.
+    */
+
+    if (n == 1) {
+        return true;
+    }
+
+    let numTern = n.toString(3);
+    return (numTern[0] == '1' &&
+        !(numTern.slice(1).split('').findIndex(function (x) { return x != '0' }) > -1))
+};
