@@ -82,3 +82,17 @@ var isPowerOfThree = function (n) {
     return (numTern[0] == '1' &&
         !(numTern.slice(1).split('').findIndex(function (x) { return x != '0' }) > -1))
 };
+
+//#4 Number of 1 Bits
+
+// Write a function that takes an unsigned integer and return the number of 
+// '1' bits it has (also known as the Hamming weight).
+
+/**
+ * @param {number} n - a positive integer
+ * @return {number}
+ */
+var hammingWeight = function (n) {
+    // remove 0s from base2 representation of the number
+    return n.toString(2).replace(/0/g, '').length;
+};
