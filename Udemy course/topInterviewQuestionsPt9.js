@@ -97,3 +97,32 @@ var getIntersectionNode = function (headA, headB) {
 
     return curB;
 };
+
+
+//#3 Implement strStr()
+
+//Implement strStr().
+
+//Return the index of the first occurrence of needle in haystack, or - 1 
+//if needle is not part of haystack.
+
+//    Example 1:
+
+//Input: haystack = "hello", needle = "ll"
+//Output: 2
+
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function (haystack, needle) {
+    const needleLength = needle.length;
+    if (needleLength === 0) return 0;
+    for (let i = 0; i < haystack.length; i++) {
+        if (haystack.substring(i, i + needleLength) === needle) {
+            return i;
+        }
+    }
+    return -1;
+};
