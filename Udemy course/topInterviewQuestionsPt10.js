@@ -46,3 +46,29 @@ var rotate = function(nums, k) {
     nums.unshift(...nums.splice(nums.length - k));
     return nums;
 };
+
+//#3 Count Primes
+
+//Count the number of prime numbers less than a non-negative number, n.
+
+//Example:
+
+//Input: 10
+//Output: 4
+//Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var countPrimes = function(n) {
+    const nums = [...Array(n).keys()].slice(2);
+    for (let i = 0; i <= Math.floor(Math.sqrt(n)); i++) {
+        if (nums[i]) {
+            for (let j = i + nums[i]; j <= n; j += nums[i]) {
+                nums[j] = undefined; // Sieve of Eratosthenes
+            }
+        }
+    }
+    return nums.filter(n => n).length;
+};
