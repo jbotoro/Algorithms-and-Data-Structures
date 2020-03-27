@@ -90,3 +90,47 @@ var reverse = function(x) {
     const reversed =  parseInt(Math.abs(x).toString().split('').reverse().join('')) * Math.sign(x);
     return (reversed <= 0x7fffffff && reversed >= -0x80000000) ? reversed : 0;
 };
+
+//#5 Binary Tree Inorder Traversal
+
+//Given a binary tree, return the inorder traversal of its nodes' values.
+
+//Example:
+
+//Input: [1,null,2,3]
+//   1
+//    \
+//     2
+//   /
+//   3
+
+//Output: [1,3,2]
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+function inorderTraversal(root) {
+    const stack = [];
+    const res = [];
+
+    while (root || stack.length) {
+        if (root) {
+            stack.push(root);
+            root = root.left;
+        } else {
+            root = stack.pop();
+            res.push(root.val);
+            root = root.right;
+        }
+    }
+
+    return res;
+}
