@@ -42,3 +42,44 @@ var trap = function(array) {
     }
     return leftArray.reduce((a,b)=> a +b,0)
 };
+
+//#2 Word Break
+
+//Given a non-empty string s and a dictionary wordDict containing a list of 
+//non-empty words, determine if s can be segmented into a space-separated 
+//sequence of one or more dictionary words.
+
+//Note:
+
+//The same word in the dictionary may be reused multiple times in the segmentation.
+//You may assume the dictionary does not contain duplicate words.
+//Example 1:
+
+//Input: s = "leetcode", wordDict = ["leet", "code"]
+//Output: true
+//Explanation: Return true because "leetcode" can be segmented as "leet code".
+
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function(s, wordDict) {
+    if (!s && !wordDict.length) {
+        return true;
+    } else if (!s || !wordDict.length ) {
+        return false;
+    }    
+    let dp = new Array(s.length+1).fill(false);
+    dp[0] = true;
+    // dp[i] 代表 0-i是breakable的
+    for (let i = 1; i <= s.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (dp[j] && wordDict.includes(s.substr(j, i - j))) {
+                dp[i] = true;
+                break;
+            }
+        }
+    } 
+    return dp[s.length]
+};
