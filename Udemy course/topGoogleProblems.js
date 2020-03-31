@@ -122,3 +122,42 @@ function swap(nums, i, j) {
     nums[i] = nums[j];
     nums[j] = temp;
 }
+
+//#4 Merge Intervals
+
+//Given a collection of intervals, merge all overlapping intervals.
+
+//Example 1:
+
+//Input: [[1,3],[2,6],[8,10],[15,18]]
+//Output: [[1,6],[8,10],[15,18]]
+//Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+    if (intervals.length === 0) {
+        return intervals;
+    } 
+    
+    const merged = [];
+    
+    intervals.sort((a, b) => a[0] === b[0] ? a[1] - b[1] : a[0] - b[0])
+        
+    let buffer = intervals[0];
+    
+    for (let i = 1; i < intervals.length; i++) {
+        if (intervals[i][0] <= buffer[1]) {
+            buffer = [buffer[0], Math.max(buffer[1], intervals[i][1])];
+        } else {
+            merged.push(buffer);
+            buffer = intervals[i];
+        }
+    }
+    
+    merged.push(buffer);
+    
+    return merged;
+};
