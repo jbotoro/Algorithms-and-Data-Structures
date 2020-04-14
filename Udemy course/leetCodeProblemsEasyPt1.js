@@ -86,3 +86,51 @@ var isValidSudoku = function(board) {
         }
     return true
 };
+
+// Permutations
+
+//Given a collection of distinct integers, return all possible permutations.
+
+//Example:
+
+//Input: [1,2,3]
+//Output:
+//[
+//  [1,2,3],
+//  [1,3,2],
+//  [2,1,3],
+//  [2,3,1],
+//  [3,1,2],
+//  [3,2,1]
+//]
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    let output = [];
+    
+    function backtrack(first){
+        // if all integers are used up
+        // use distructure operator to clone 'nums' value and save to 'result'
+        if(first === nums.length) output.push([...nums]);
+        
+        // we iterate over the indexes i from 'first' to the length
+        // of the entire sequence 'nums'
+        for(let i = first; i < nums.length; i++){
+            // place i-th integer first
+            // in the current permutation
+            [nums[first], nums[i]] = [nums[i], nums[first]];
+            
+            // use next integers to complete the permutations
+            backtrack(first + 1);
+            
+            // backtrack
+            [nums[first], nums[i]] = [nums[i], nums[first]];
+        }      
+    }
+    
+    backtrack(0);
+    return output;
+};
