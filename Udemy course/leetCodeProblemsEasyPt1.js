@@ -1,4 +1,4 @@
-/// Letter Combinations of a Phone Number
+/// #1 Letter Combinations of a Phone Number
 
 //Given a string containing digits from 2-9 inclusive, return all possible 
 //letter combinations that the number could represent.
@@ -30,7 +30,7 @@ const letterCombinations = (digits, i = 0) => {
     }, []) // default & initial outputArray value
 }
 
-// Valid Sudoku
+// #2 Valid Sudoku
 
 //Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be 
 //validated according to the following rules:
@@ -87,7 +87,7 @@ var isValidSudoku = function(board) {
     return true
 };
 
-// Permutations
+// #3 Permutations
 
 //Given a collection of distinct integers, return all possible permutations.
 
@@ -135,7 +135,7 @@ var permute = function(nums) {
     return output;
 };
 
-//Unique Paths
+//#4 Unique Paths
 
 //A robot is located at the top-left corner of a m x n grid (marked 'Start' 
 //in the diagram below).
@@ -172,4 +172,65 @@ var uniquePaths = function(m, n) {
         }
     }
     return carry[n];
+};
+
+// #5 Add Two Numbers
+
+//You are given two non-empty linked lists representing two non-negative 
+//integers. The digits are stored in reverse order and each of their nodes 
+//contain a single digit. Add the two numbers and return it as a linked list.
+
+//You may assume the two numbers do not contain any leading zero, 
+//except the number 0 itself.
+
+//Example:
+
+//Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+//Output: 7 -> 0 -> 8
+//Explanation: 342 + 465 = 807.
+
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+const addTwoNumbers = (l1, l2) => {
+    // set initial node to null (to be skipped at the end)
+    let result = new ListNode(null)
+    // set a point to the current index (to append to the end of the linked list)
+    let last = result
+    let carry = 0
+    // loop while there are items in either l1, l2, or carry
+    while (l2 || l1 || carry) {
+        // default l1 and l2 values incase one array is larger than the other
+        let l2val = l2 ? l2.val : 0
+        let l1val = l1 ? l1.val : 0
+        // handle carry logic if greater than 10
+        let sum = l2val + l1val + carry
+        if (sum >= 10) {
+            sum = sum - 10
+            carry = 1
+        } else {
+            carry = 0
+        }
+        // make a new node 
+        let node = new ListNode(sum)
+        // append node
+        last.next = node
+        last = node
+        // continue to next item of each array if exists
+        if (l2) { l2 = l2.next }
+        if (l1) { l1 = l1.next }
+    }
+    // return the result without the null in the front
+    return result.next
 };
