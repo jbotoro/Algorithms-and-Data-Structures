@@ -513,3 +513,37 @@ var findUnsortedSubarray = function(nums) {
     }
 	// r-l=0 for single number list, r-l=-1 for already sorted list
     return r-l < 1 ? 0 : r-l+1;
+
+//#12 Palindromic Substrings
+
+//Given a string, your task is to count how many palindromic substrings in 
+//this string.
+
+//The substrings with different start indexes or end indexes are counted as 
+//different substrings even they consist of same characters.
+
+//Example 1:
+
+//Input: "abc"
+//Output: 3
+//Explanation: Three palindromic strings: "a", "b", "c".
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var countSubstrings = function(s) {
+    let count1 = 0
+    function count(left,right){
+        while(left>-1&&right<s.length&&s[left]==s[right]){
+            count1++
+            left--
+            right++
+        }
+    }
+
+    for(var i=0;i<s.length;i++){
+        count(i,i);
+        count(i,i+1)
+    }
+    return count1
+}
