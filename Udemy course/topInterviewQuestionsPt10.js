@@ -134,3 +134,26 @@ function inorderTraversal(root) {
 
     return res;
 }
+
+function stickers(phrase) {
+    let map = {};
+
+    for(let i = 0; i < phrase.length; i++){
+        let currentLetter = phrase[i];
+
+        if(!map[currentLetter]){
+            map[currentLetter] = 0;
+        }
+
+        map[currentLetter] = map[currentLetter] + 1;
+    }
+
+    let maxLetterVal = Object.keys(map).reduce((a,b) => map[a] > map[b] ? map[a] : map[b])
+    let mostCommonLetter = Object.keys(map).reduce((a,b) => map[a] > map[b] ? a : b)
+
+    if(mostCommonLetter === 'a'){
+        return Math.ceil(maxLetterVal)
+    }
+
+    return maxLetterVal
+}

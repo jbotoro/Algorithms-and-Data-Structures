@@ -16,3 +16,29 @@ function bubbleSort(array) {
 
 bubbleSort(numbers);
 console.log(numbers);
+
+
+function anagrams(text){
+  let map = {};
+  let res = [];
+
+  for(let i = 0; i < text.length; i++){
+    let currWord = text[i];
+    let mapped = currWord.split('').sort().join('');
+
+    if(i === 0){
+      res.push(currWord)
+      map[mapped] = true;
+      console.log(res)
+    }
+
+    if(!map[mapped]){
+      map[mapped] = true;
+      res.push(currWord)
+      console.log(res)
+    }
+  }
+  console.log(res);
+  console.log(map)
+  return res.sort()
+}
