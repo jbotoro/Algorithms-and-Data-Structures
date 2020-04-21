@@ -597,3 +597,49 @@ var topKFrequent = function(nums, k) {
         .map(item => item[0])
         .slice(0, k);
 };
+
+//#14 Generate Parentheses
+
+//Given n pairs of parentheses, write a function to generate all combinations 
+//of well-formed parentheses.
+
+//For example, given n = 3, a solution set is:
+
+// [
+//   "((()))",
+//   "(()())",
+//   "(())()",
+//   "()(())",
+//   "()()()"
+// ]
+
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {
+    let result = []
+    generate(n,n,[]);
+    
+    //backtracking    
+    function generate(left,right,sets){
+        if(left>right){
+            return true;
+        }
+        if(!left&&!right&&sets.length===n*2){
+            result.push(sets.join(''));
+        }
+        if(left){
+            sets.push('(');
+            generate(left-1,right,sets);
+            sets.pop();
+        }
+        if(right>left){
+            sets.push(')');
+            generate(left,right-1,sets);
+            sets.pop(); 
+        }
+    }
+
+    return result
+}
