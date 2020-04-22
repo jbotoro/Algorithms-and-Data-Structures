@@ -643,3 +643,39 @@ var generateParenthesis = function(n) {
 
     return result
 }
+
+//# 14 Decode String
+
+//Given an encoded string, return its decoded string.
+
+//The encoding rule is: k[encoded_string], where the encoded_string 
+//inside the square brackets is being repeated exactly k times. Note that k is 
+//guaranteed to be a positive integer.
+
+//You may assume that the input string is always valid; No extra white spaces, 
+//square brackets are well-formed, etc.
+
+//Furthermore, you may assume that the original data does not contain any digits 
+//and that digits are only for those repeat numbers, k. For example, there 
+//won't be input like 3a or 2[4].
+
+//Examples:
+
+//s = "3[a]2[bc]", return "aaabcbc".
+//s = "3[a2[c]]", return "accaccacc".
+//s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
+
+var decodeString = function(s) {
+    while(s.indexOf('[')!=-1) { // base case, breaks when there's no bracket found
+        let left = s.lastIndexOf('['); // left position of the inner-most `[`
+        let right = left + s.substring(left).indexOf(']'); // right positio of the inner-most `]`
+        let word = s.substring(left+1, right); // between them is the string
+        let count = "";
+        while(s[left-1] >= 0 && s[left-1]<=9) { // try to find a valid number
+            left--;
+            count = s[left] + count;
+        }
+        s = s.substring(0,left) + word.repeat(count) + s.substring(right+1); // put them all togher and repeat :)
+    }
+    return s;
+};
