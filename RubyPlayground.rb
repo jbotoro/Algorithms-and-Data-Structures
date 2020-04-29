@@ -1,4 +1,2 @@
-puts 1.class
-puts nil.class
-puts 'h'.class
-puts :symbol.class
+
+puts (1..10).select{|x|x % 2 ==0}.reduce(:+)
