@@ -34,6 +34,21 @@ var res = str.length + 1;
          
 }
 
+/// PUBLICA CHALLENGE
+
+function createNests(obj, keyPath, value) {
+    let lastKeyIndex = keyPath.length - 1;
+    for( let i = 0; i < lastKeyIndex; i++){
+        let key = keyPath[i];
+        if( !(key in obj)){
+            obj[key] = {}
+        }
+        obj = obj[key];
+    }
+
+    obj[keyPath[lastKeyIndex]] = value;
+}
+
 
 
 
@@ -55,30 +70,107 @@ function nest(param) {
     let splitList = param.split('\n');
     // console.log(splitList)
 
-    let colArr = splitList[0];
+    
     splitList.shift();
 
     for(let i = 0; i < splitList.length; i++){
+
+        // current entry 
         let splitEntry = splitList[i].split(',');
         let id = splitEntry[0];
         let nestOrder = splitEntry[1]
-        // console.log(nestOrder);
+    
+        // create keyPath i.e. structure of nested objects and split on > which divides each level of path
         nestOrder = nestOrder.split('>');
-        // console.log(nestOrder);
-        // console.log(nestOrder);
+        
         let description = splitEntry[2];
         let provider = splitEntry[3];
         let price = splitEntry[4];
-        // console.log(splitEntry);
+       
+        // create obj for final value to be insert at deepest part of path
+        let value = {
+            'id' : id,
+            'description' : description,
+            'provider' : provider,
+            'price' : price
+        }
 
-        let mostDepth = nestOrder.length - 1;
+            
 
-        map = nestOrder.reduceRight((obj, next) => ( { [next] : obj } ), {})
-        console.log(map);
+        
+        // use helper fuction to use nestOrder to create nested obj structure, inserting value into deepest part of the path
+
+        createNests(map, nestOrder, value)
+
 
        
     }
 
+    console.log(JSON.stringify(map));
+
 }
 
 nest(LiveRampDataStoreBase);
+
+{ "123Push ":
+    {" Consumer ":
+        {" Demographic ":
+            {" Senior Citizens ":
+                {" Age 65+":
+                    {"id":"1004765519",
+                    "description":"Individuals living in a household with 3 or more people.",
+                    "provider":"123Push",
+                    "price":"0.75"
+                }
+            }
+        }
+    }
+},
+"Alliant ":
+    {" Automotive ":
+        {" Auto - In Market New Vehicle":
+            {"id":"1000846336",
+            "description":"In-Market model for new vehicle",
+            "provider":"Alliant",
+            "price":"2.75"},
+        " Auto - In Market for Insurance":
+            {"id":"1000846346",
+            "description":"In-Market model for auto insurance",
+            "provider":"Alliant",
+            "price":"2.75"}
+            ,
+        " Auto - In Market for Used Vehicle":
+            {"id":"1000847476",
+            "description":"In-Market model for used vehicle",
+            "provider":"Alliant",
+            "price":"2.75"}
+    },
+    " Demographic ":
+        {" Homeowner":
+            {"id":"1000846216",
+            "description":"Active multi-channel households who own their home",
+            "provider":"Alliant",
+            "price":"2.0"},
+        " Age 25-29 years":
+            {"id":"1000845656",
+            "description":"Active multi-channel households with a person age 25-29 years old present in the HH.",
+            "provider":"Alliant",
+            "price":"1.75"},
+        " Age 30-34 years":
+            {"id":"1000848136",
+            "description":"Active multi-channel households with a person age 30-34 years old present in the HH.",
+            "provider":"Alliant",
+            "price":"1.75"},
+        " Age 35-39 years":
+            {"id":"1000845646",
+            "description":"Active multi-channel households with a person age 35-39 years old present in the HH.",
+            "provider":"Alliant",
+            "price":"1.75"},
+        " Age 40-44 years":
+            {"id":"1000848146",
+            "description":"Active multi-channel households with a person age 40-44 years old present in the HH.",
+            "provider":"Alliant",
+            "price":"1.75"}
+        }
+    }
+}
