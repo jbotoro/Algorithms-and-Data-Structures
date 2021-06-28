@@ -95,3 +95,69 @@ nest(LiveRampDataStoreBase);
 // 2: when returning a React component make sure its wrapped in a div
 // 3: use object-fit CSS property on img along with height and width properties to ensure same size for all images
 // 4: Inline css uses {} as a wrapper ie. <img style: {'object-fit' : 'contain'}> or a string <img style= "color : blue">
+
+
+// Verily
+
+// Given an array of numbers, find the value of the contiguous sequence with the largest product.
+// {6, -3, -10, 0, 2} = 180
+// largest = 6
+// {-2, -2, 0, 1} = 4
+// {-1, -3, -10, 0, 60} = 60
+// {-2, -3, 0, -2, -40} = 80
+// {3, -1, -2} = 6
+
+
+// My attempted solution
+
+const arr = [6, -3, -10, 0, 2];
+
+
+const largestContiguous = (arr) => {
+  let sorted = arr.sort((a,b) => a - b);
+  let len = arr.length;
+  
+  let largestSingle = sorted[len - 1];
+  
+  let largestCont = largestSingle
+  
+  for(let i = 0; i < len; i++){
+    let current = arr[i];
+    if(current === 0) continue;
+//     console.log(current);
+    
+    let currentProduct = undefined
+    
+    for(let j = i + 1; j < len; j++){
+      let next = arr[j];
+      
+      console.log(next)
+      
+      if(next === 0) break;
+      
+      
+      
+      let product = next * current;
+      
+      if( product > largestCont) largestCont = product;
+      
+//       console.log(product);
+      
+      if(!currentProduct){
+        currentProduct = product
+//         console.log(currentProduct)
+      } else {
+//         console.log(currentProduct)
+        currentProduct = currentProduct * next
+        if(currentProduct > largestCont) largestCont = currentProduct;
+      }
+//       console.log(largestCont);
+    }
+  }
+  
+  return largestCont;
+  
+  
+};
+
+console.log(largestContiguous(arr));
