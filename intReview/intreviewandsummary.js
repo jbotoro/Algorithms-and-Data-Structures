@@ -110,6 +110,13 @@ nest(LiveRampDataStoreBase);
 
 // My attempted solution
 
+// Where I went wrong:
+
+// 1: using break / continue when arr[i] or arr[j] === 0; this results in missing certain subarray combinations
+// 2: sorting the arr / making several variables instead of just one "max"
+// 3: didn't add 1 to the len for the j for loop (misses last value)
+// 4: didnt use slice or reduce to clean up the calculation of each subarrays product
+
 const arr = [6, -3, -10, 0, 2];
 
 
@@ -160,4 +167,32 @@ const largestContiguous = (arr) => {
   
 };
 
-console.log(largestContiguous(arr));
+
+// Actual Solution
+
+// Takeaways
+
+// 1: use .slice method to easily create subarrays along with 2 for loops to create all possible subarrays
+
+// 2: use .reduce on each subarray to calculate the product of all subarrays to determine max
+
+// 3: reassign max if currentSubArray product is larger
+
+const largestContiguous2 = (arr) => {
+    let max = arr[0];
+    let len = arr.length;
+
+    for(let i = 0; i < len; i++){
+        for(let j = i + 1; j < len + 1; j++){
+
+            // use slice & reduce to quickly determine product of each subarray
+
+            let currentSubArray = arr.slice(i,j).reduce((acc,curr) => acc *= curr)
+            if( currentSubArray > max) max = currentSubArray;
+        }
+    }
+
+    return max;
+}
+
+console.log(largestContiguous2(arr));
