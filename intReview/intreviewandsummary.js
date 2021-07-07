@@ -196,3 +196,36 @@ const largestContiguous2 = (arr) => {
 }
 
 console.log(largestContiguous2(arr));
+
+// Expedock coder b assesment
+
+// given array of numbers return all pairs of numbers whose sum equals the value 
+//of the first element in the array, and in the order that the pairs appear 
+/// or start in the array
+// all pairs should have a comma separating the two numbers and a space in between each pair
+// return -1 if no pairs are found
+
+// i.e.
+
+// input : [10,3,6,1,5,3,4, 7]
+// pairs / output: 3,7 6,4 3,7
+
+let exArr = [10,3,6,1,5,3,4,7]
+
+function twoSum(arr) {
+    let targetSum = arr[0];
+    let res = '';
+
+    for(let i = 1; i < arr.length; i++){
+        for(let j = i + 1; j < arr.length + 1; j++){
+            let currentSum = arr[i] + arr[j];
+            if( currentSum === targetSum) {
+                res += arr[i] + ',' + arr[j] + ' '
+            }
+        }
+    }
+
+    return res.length ? res : - 1
+}
+
+console.log(twoSum(exArr))
