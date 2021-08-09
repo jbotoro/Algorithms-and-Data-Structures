@@ -25,3 +25,18 @@ function BinaryReversal(str) {
   res = parseInt(rev,2); // convert binary to int
   return res; 
 }
+
+
+function Splice(arr){
+    let idx = 4
+    let newSeq = new Array(4).fill(1);
+
+    arr.splice(3,4);
+    arr.splice(3, ...newSeq);
+
+    console.log(arr);
+}
+
+let arr1 = [1,1,0,0,0,0,1,1,0,0,1];
+
+console.log(plice(arr1))

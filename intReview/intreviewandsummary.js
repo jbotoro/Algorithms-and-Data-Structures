@@ -229,3 +229,13 @@ function twoSum(arr) {
 }
 
 console.log(twoSum(exArr))
+
+
+// Total Subarrays that alternate even/odds
+
+// Given an array (arr) determine the total number of subarrays that alternate between even and odd numbers
+// subarrays with only one element count as well so at the very least the number will be at least
+// the size of the number of elements in the array.
+
+// i.e.  Input: [5,8,10,5,4,2] 
+      // Output: 
